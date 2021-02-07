@@ -1,0 +1,16 @@
+
+//eslint 환경셋팅
+
+{
+    "git.autofetch": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "eslint.codeAction.showDocumentation": {
+    
+
+        "enable": true
+    },
+    "files.autoSave": "onFocusChange",
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true
+    }
+}
