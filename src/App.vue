@@ -1,19 +1,14 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
+    <v-app-bar app color="primary" dark>
     <v-app-bar-nav-icon @click="drawer =!drawer"/>
     <site-title :title="site.title"></site-title>
-     <v-spacer></v-spacer>
+     <v-spacer/>
+     <site-sign></site-sign>
     </v-app-bar>
-
     <v-navigation-drawer app v-model="drawer" width="400">
       <site-menu :items="site.menu"></site-menu>
     </v-navigation-drawer>
-
     <v-main>
       <router-view/>
     </v-main>
@@ -22,12 +17,13 @@
 </template>
 
 <script>
-import siteTitle from '@/views/site/title'
-import siteFooter from '@/views/site/footer'
-import siteMenu from '@/views/site/menu'
+import SiteTitle from '@/views/site/title'
+import SiteFooter from '@/views/site/footer'
+import SiteMenu from '@/views/site/menu'
+import SiteSign from '@/views/site/sign'
 
 export default {
-  components: { siteTitle, siteFooter, siteMenu },
+  components: { SiteTitle, SiteFooter, SiteMenu, SiteSign },
   name: 'App',
   data () {
     return {
@@ -82,23 +78,6 @@ export default {
       }, (e) => {
         console.log(e.message)
       })
-    },
-    save () {
-      console.log('save')
-      this.$firebase.database().ref().child('site').set({
-        title: 'abcd',
-        text: 'tttt'
-      })
-    },
-    read () {
-      this.$firebase.database().ref().child('site').on('value', (sn) => {
-        console.log(sn)
-        console.log('site :', sn.val())
-      })
-    },
-    async readOne () {
-      const sn = await this.$firebase.database().ref().child('site').once('value')
-      console.log('readOne : ', sn.val())
     }
   }
 }
